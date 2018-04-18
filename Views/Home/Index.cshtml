@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="search">
+    <h1>Main Page</h1>
+    <form action="">
+        <input type="text" value="search...">
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<div class="newProducts">
+    @foreach(Product prod in ViewBag.Products)
+    {
+        <div class="product">
+            <img class="image" src="@prod.image" alt="@prod.name">
+            <h4>@prod.name</h4>
+            <h5>(@prod.quantity left)</h5>
+        </div>
+    }
+    <p><a href="">show more...</a></p>
+</div>
+<div class="recentOrders">
+    <h3>Recent Orders</h3>
+    @foreach(Order ord in ViewBag.Orders)
+    {
+        var num = ord.created_at.Date - DateTime.Now.Date;
+        <h4>@ord.customers.name purchased @ord.quantity @ord.products.name | @ord.created_at.ToString("MMM dd yyyy") |</h4>
+    }
+    <p><a href="">show more...</a></p>
+</div>
+<div class="newCustomers">
+    <h3>New Customers</h3>
+    @foreach(Customer cust in ViewBag.Customers)
+    {
+        <h4>@cust.name joined the store | @cust.created_at.ToString("MMM dd yyyy") |</h4>
+    }
+    <p><a href="">show more...</a></p>
+</div>

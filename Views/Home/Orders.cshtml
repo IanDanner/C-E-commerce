@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div class="newOrder">
+    <h3>Add a new order</h3>
+    <span>@TempData["errors"]</span>    
+    <form action="/create_order" method="POST">
+        <label>Customer </label>
+        <select name="custId">
+            @foreach(Customer cust in ViewBag.Customers)
+            {
+                <option value="@cust.id">@cust.name</option>
+            }
+        </select>
+        <label>Order</label>
+        <select name="prodId">
+            @foreach(Product prod in ViewBag.Products)
+            {
+                <option value="@prod.id">@prod.name</option>
+            }
+        </select>
+        <input type="number" name="amount" min="1">
+        <button type="submit">Order</button>
+    </form>
+</div>
+<div class="orderTable">
+    <p>Filter Box</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Order ord in ViewBag.Orders)
+            {
+                <tr>
+                    <td>@ord.customers.name</td>
+                    <td>@ord.products.name</td>
+                    <td>@ord.quantity</td>
+                    <td>@ord.created_at.ToString("MMM dd yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

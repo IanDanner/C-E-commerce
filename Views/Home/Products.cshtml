@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="newProduct">
+    <h3>Add a new product</h3>
+    @model E_Commerce.Models.ProductCreate
+    <form action="/create_product" method="POST">
+        <span asp-validation-for="name"></span>
+        <li><label asp-for="name"></label>
+        <input asp-for="name"/></li>
+        <span asp-validation-for="image"></span>
+        <li><label asp-for="image"></label>
+        <input asp-for="image"/></li>
+        <span asp-validation-for="description"></span>    
+        <li><label asp-for="description"></label>
+        <textarea asp-for="description" cols="22" rows="8"></textarea></textarea></li>
+        <span asp-validation-for="quantity"></span>
+        <li><label asp-for="quantity"></label>
+        <input asp-for="quantity" min="0"/></li>
+        <li><button type="submit">Create</button></li>
+    </form>
+</div>
+<div class="allProducts">
+    <h2>All Products</h2>
+    <form action="/search">
+        <input type="text" value="search...">
+        <button type="submit">Filter</button>
+    </form>
+    @foreach(Product prod in ViewBag.Products)
+    {
+        <div class="product">
+            <img class="image" src="@prod.image" alt="@prod.name">
+            <h4>@prod.name</h4>
+            <h5>(@prod.quantity left)</h5>
+        </div>
+    }
+    <p><a href="">show more...</a></p>
+</div>

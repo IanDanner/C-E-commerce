@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Customers";
+}
+<div class="createCustomer">
+    <h2>Add a new Customer</h2>
+    <span>@TempData["errors"]</span>
+    <form action="/create_customer" method="POST">
+        <label>Customer Name: </label>
+        <input type="text" name="custName">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div class="customerTable">
+    <p>Filter Box</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Created Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Customer cust in ViewBag.Customers)
+            {
+                <tr>
+                    <td>@cust.name</td>
+                    <td>@cust.created_at.ToString("MMM dd yyyy")</td>
+                    <td><a href="/delete_customer/@cust.id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
